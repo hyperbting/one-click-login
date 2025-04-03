@@ -25,7 +25,7 @@ class OneClickLogin {
 
 	function login($login, $password) {
 		// check if server is allowed
-		return isset($this->servers[SERVER]);
+		return true;//return isset($this->servers[SERVER]);
 	}
 	
 	function databaseValues($server){
@@ -46,19 +46,19 @@ class OneClickLogin {
 		</form>
 		<table>
 			<tr>
-				<th><?php echo lang('Server') ?></th>
-				<th><?php echo lang('User') ?></th>
-				<th><?php echo lang('Database') ?></th>
+				<th>Server</th>
+				<th>User</th>
+				<th>Database</th>
 			</tr>
 			
 			<?php
 			foreach($this->servers as $host => $server):
-			
+
 			
 				$databases = isset($server['databases']) ? $server['databases'] : "";
 				if (!is_array($databases))
 					$databases = array($databases => $databases);
-				
+
 				foreach(array_keys($databases) as $i => $database):
 					?>
 					<tr>
@@ -71,11 +71,11 @@ class OneClickLogin {
 							<form action="" method="post">
 								<input type="hidden" name="auth[driver]" value="<?php echo $this->driver; ?>">
 								<input type="hidden" name="auth[server]" value="<?php echo $host; ?>">
-								<input type="hidden" name="auth[username]" value="<?php echo h($server["username"]); ?>">
-								<input type="hidden" name="auth[password]" value="<?php echo h($server["pass"]); ?>">
-								<input type='hidden' name="auth[db]" value="<?php echo h($database); ?>"/>
+								<input type="hidden" name="auth[username]" value="<?php echo $server["username"]; ?>">
+								<input type="hidden" name="auth[password]" value="<?php echo $server["pass"]; ?>">
+								<input type='hidden' name="auth[db]" value="<?php echo $database; ?>"/>
 								<input type='hidden' name="auth[permanent]" value="1"/>
-								<input type="submit" value="<?php echo lang('Enter'); ?>">
+								<input type="submit" value="Enter">
 							</form>
 						</td>
 					</tr>
